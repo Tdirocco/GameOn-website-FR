@@ -82,6 +82,61 @@ function isValidDate(date){
 form.addEventListener("input", function (e){
   regData[e.target.name] = e.target.value;
 
+if (!inMin(regData.first,2)){
+  errPrenom.setAttribute("data-error-visible",'true');
+  errPrenom.setAttribute("data-error",'Veuillez entrer 2 caractères ou plus pour le champ Prénom.');
+}else{
+  errPrenom.removeAttribute("data-error-visible");
+  errPrenom.removeAttribute("data-error");
+}
+
+if (!inMin(regData.last,2)){
+  errNom.setAttribute("data-error-visible",'true');
+  errNom.setAttribute("data-error",'Veuillez entrer 2 caractères ou plus pour le champ Nom.');
+}else{
+  errNom.removeAttribute("data-error-visible");
+  errNom.removeAttribute("data-error");
+}
+
+if (!isRequired(regData.email)){
+  errEmail.setAttribute("data-error-visible",'true');
+  errEmail.setAttribute("data-error",'Veuillez entrer une adresse Mail valide.');
+}else if(!isEmail(regData.email)){
+  errEmail.setAttribute("data-error-visible",'true');
+  errEmail.setAttribute("data-error",'Veuillez entrer une adresse Mail valide.');
+}else{
+  errEmail.removeAttribute("data-error-visible");
+  errEmail.removeAttribute("data-error");
+}
+
+if (!isRequired(regData.birthdate)){
+  errBdate.setAttribute("data-error-visible",'true');
+  errBdate.setAttribute("data-error",'Vous devez entrer votre date de naissance.');
+}else if(!isValidDate(regData.birthdate)){
+  errBdate.setAttribute("data-error-visible",'true');
+  errBdate.setAttribute("data-error",'Vous devez entrer une date de naissance Valide.');
+}else{
+  errBdate.removeAttribute("data-error-visible");
+  errBdate.removeAttribute("data-error");
+}
+
+if (!isRequired(regData.quantity)){
+  errQuantity.setAttribute("data-error-visible",'true');
+  errQuantity.setAttribute("data-error",'Vous devez indiquer un nombre de tournois de 0 à 99.')
+}else{
+  errQuantity.removeAttribute("data-error-visible");
+  errQuantity.removeAttribute("data.error");
+}
+
+if (!isRequired(regData.location)){
+  errLocation.setAttribute("data-error-visible",'true');
+  errLocation.setAttribute("data-error",'Vous devez choisir une option.')
+}else{
+  errLocation.removeAttribute("data-error-visible");
+  errLocation.removeAttribute("data.error");
+}
+
+
 
 
 
