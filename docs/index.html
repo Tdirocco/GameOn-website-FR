@@ -181,20 +181,22 @@
               </div>
 
               <div
-                class="formData">
+                id="conditions"
+                class="formData">                
                 <input
                   class="checkbox-input"
                   type="checkbox"
                   id="checkbox1"
+                  name="conditions"
                   data-error='Vous devez vérifier que vous acceptez les termes et conditions.'
                   checked
-                />
+                />               
                 <label class="checkbox2-label" for="checkbox1" required>
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
                 <br>
-                <input class="checkbox-input" type="checkbox" id="checkbox2" />
+                <input class="checkbox-input" type="checkbox" id="checkbox2" name="newsLetter"/>
                 <label class="checkbox2-label" for="checkbox2">
                   <span class="checkbox-icon"></span>
                   Je souhaite être prévenu des prochains évènements.
@@ -204,8 +206,10 @@
               <input
                 class="btn-submit"
                 type="submit"
+                id="submitBtn"
                 class="button"
                 value="C'est parti"
+                disabled
               />
             </form>
           </div>

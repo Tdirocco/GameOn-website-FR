@@ -231,7 +231,11 @@ input[data-error]::after {
     content: attr(data-error);
     font-size: 0.4em;
     color: red;
+    display: block;
+    text-align: left;
 }
+
+
 .checkbox-label,
 .checkbox2-label {
   position: relative;
@@ -333,6 +337,12 @@ input[data-error]::after {
   cursor: pointer;
   border: 0;
 }
+
+#submitBtn:disabled{
+  background: #feb8c0;
+}
+
+
 /* custom select styles */
 .custom-select {
   position: relative;
