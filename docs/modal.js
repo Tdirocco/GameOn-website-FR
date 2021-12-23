@@ -27,6 +27,7 @@ function launchModal() {
 
 // #1_TODO: fermer la modale
     // New DOM Element for quit
+const form = document.querySelector("#register");
 const closeBtn = document.querySelector(".close"); 
 
     // quit modal event
@@ -34,13 +35,14 @@ closeBtn.addEventListener("click", quitModal);
 
     // quit modal form
 function quitModal(){
+  //form.reset();
   modalbg.style.display = "none";
 }
 
 
 // #2_Implémenter les entrées du formulaire
     // New DOM Elements for get and verify the entries 
-const form = document.querySelector("#register");
+
 const conditions = document.querySelector("#checkbox1");
 
 const errPrenom = document.querySelector("#err_first");
@@ -81,8 +83,14 @@ function isValidDate(date){
 
     // Getting entries
 form.addEventListener("input", function (e){
-  regData[e.target.name] = e.target.value;
+  if(e.target.name==="conditions"){
+    regData[e.target.name] = e.target.checked;
+  }else{
+    regData[e.target.name] = e.target.value;
+  }
+  
 
+    //validations rules and errors messages
 if (!inMin(regData.first,2)){
   errPrenom.setAttribute("data-error-visible",'true');
   errPrenom.setAttribute("data-error",'Veuillez entrer 2 caractères ou plus pour le champ Prénom.');
@@ -150,9 +158,11 @@ if (!isRequired(regData.location)){
   errLocation.removeAttribute("data.error");
   validReg.errors.location=false;
 }
+validForm();
+})
 
-conditions.addEventListener("change", function(){
-  if (conditions.checked !== true){
+conditions.addEventListener("change", function(e){
+  if (e.target.checked !== true){
     errConditions.setAttribute("data-error-visible", 'true');
     errConditions.setAttribute("data-error", 'Vous devez accepter les termes et conditions.');
     validReg.errors.conditions=true;
@@ -161,31 +171,7 @@ conditions.addEventListener("change", function(){
     errConditions.removeAttribute("data-error");
     validReg.errors.conditions=false;
   }
-})
-
-if (validReg.errors.first == true ||
-  validReg.errors.last == true ||
-  validReg.errors.email == true ||
-  validReg.errors.birthdate == true ||
-  validReg.errors.quantity == true ||
-  validReg.errors.location == true ||
-  validReg.errors.conditions == true) {
-    validReg.isValid = false;
-  }else{
-    validReg.isValid = true;
-  }
-
-  if (validReg.isValid == false){
-    btnSubmit.disabled = true;
-  }else{
-    btnSubmit.disabled = false;
-  }
-
-
-
-console.log(regData);
-console.log(validReg);
-
+  validForm();
 })
 
 
@@ -196,18 +182,46 @@ const btnSubmit = document.querySelector("#submitBtn");
 
 
 
+    // Submit Validation Rules   
+   
+function validForm(){
+  if (validReg.errors.first == true ||
+    validReg.errors.last == true ||
+    validReg.errors.email == true ||
+    validReg.errors.birthdate == true ||
+    validReg.errors.quantity == true ||
+    validReg.errors.location == true ||
+    validReg.errors.conditions == true) {
+      validReg.isValid = false;
+  }else{
+    validReg.isValid = true;
+  }
+   
+    //function disabled/enabled submit
+  if (validReg.isValid == false){
+    btnSubmit.setAttribute("disabled",true);
+  }else{
+    btnSubmit.removeAttribute("disabled");
+  }
+  
+}
 
 
-    // Submit Validation Rules
-btnSubmit.addEventListener("sumbit", function (e){
-  e.prenventDefault();
-
+form.addEventListener("submit", function (e){
+  if (validReg.isValid == false){
+    e.preventDefault();
+  }
 })
 
 
-
 // #4_Ajouter confirmation d'envoie réussi
-
+function validate(){
+  if (validReg.isValid == false){
+    alert("Veuillez renseigner tous les Items.");
+  }else{
+    alert("Merci! Votre réservation a bien été prise en compte.");
+  }
+}
 
 
 
