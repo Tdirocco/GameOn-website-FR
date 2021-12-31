@@ -33,10 +33,19 @@ const closeBtn = document.querySelector(".close");
     // quit modal event
 closeBtn.addEventListener("click", quitModal);
 
+
+function resetForm(){
+  const alertArray = document.querySelectorAll("div.formData");
+  for (let i=0; i<alertArray.length; i++){
+    alertArray[i].removeAttribute("data-error-visible");
+  }
+}
+
     // quit modal form
 function quitModal(){
   //form.reset();
   modalbg.style.display = "none";
+  //resetForm();
 }
 
 
@@ -198,7 +207,7 @@ function validForm(){
   }
    
     //function disabled/enabled submit
-  if (validReg.isValid == false){
+  if (validReg.isValid === false){
     btnSubmit.setAttribute("disabled",true);
   }else{
     btnSubmit.removeAttribute("disabled");
@@ -208,15 +217,18 @@ function validForm(){
 
 
 form.addEventListener("submit", function (e){
-  if (validReg.isValid == false){
+  if (validReg.isValid === false){
     e.preventDefault();
+  }else{
+    form.reset();
+    resetForm();
   }
 })
 
 
 // #4_Ajouter confirmation d'envoie réussi
 function validate(){
-  if (validReg.isValid == false){
+  if (validReg.isValid === false){
     alert("Veuillez renseigner tous les Items.");
   }else{
     alert("Merci! Votre réservation a bien été prise en compte.");
