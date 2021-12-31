@@ -34,18 +34,11 @@ const closeBtn = document.querySelector(".close");
 closeBtn.addEventListener("click", quitModal);
 
 
-function resetForm(){
-  const alertArray = document.querySelectorAll("div.formData");
-  for (let i=0; i<alertArray.length; i++){
-    alertArray[i].removeAttribute("data-error-visible");
-  }
-}
-
     // quit modal form
 function quitModal(){
   //form.reset();
   modalbg.style.display = "none";
-  //resetForm();
+  //resetAlerts();
 }
 
 
@@ -215,13 +208,22 @@ function validForm(){
   
 }
 
+    //function reset alertes
+    
+function resetAlerts(){
+  const alertArray = document.querySelectorAll("div.formData");
+  for (let i=0; i<alertArray.length; i++){
+    alertArray[i].removeAttribute("data-error-visible");
+  }
+}
+
 
 form.addEventListener("submit", function (e){
   if (validReg.isValid === false){
     e.preventDefault();
   }else{
     form.reset();
-    resetForm();
+    resetAlerts();
   }
 })
 
